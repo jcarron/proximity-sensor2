@@ -1,5 +1,6 @@
 let distance = 0
 let limit = 100
+music.setVolume(100)
 basic.forever(function () {
     pins.digitalWritePin(DigitalPin.P1, 0)
     control.waitMicros(2)
@@ -19,21 +20,13 @@ basic.forever(function () {
     } else {
         distance = limit
         serial.writeValue("distance", distance)
-        control.waitMicros(500000)
+        control.waitMicros(250000)
+        led.plotBarGraph(
+        distance,
+        limit
+        )
     }
-    music.setVolume(25)
-    music.play(music.createSoundExpression(
-    WaveShape.Sine,
-    distance * 100,
-    distance * 100,
-    255,
-    0,
-    500,
-    SoundExpressionEffect.None,
-    InterpolationCurve.Linear
-    ), music.PlaybackMode.InBackground)
-    led.plotBarGraph(
-    distance,
-    limit
-    )
+})
+basic.forever(function () {
+	
 })
